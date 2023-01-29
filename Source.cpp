@@ -71,13 +71,13 @@ int main() {
 	Parent parent;
 	Child child;
 
-	// upcast (неявное преобразование типов разрешено)
-	Parent *pParent = & child; // стэк
-	Parent *pParent2 = new Child(); // куча
+	// upcast (РЅРµСЏРІРЅРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С‚РёРїРѕРІ СЂР°Р·СЂРµС€РµРЅРѕ)
+	Parent *pParent = & child; // СЃС‚СЌРє
+	Parent *pParent2 = new Child(); // РєСѓС‡Р°
 	// downcast 
 	Child *pChild = (Child *)pParent;
-	// C-style каст выполняет первый успешный каст
-	// в порядке:
+	// C-style РєР°СЃС‚ РІС‹РїРѕР»РЅСЏРµС‚ РїРµСЂРІС‹Р№ СѓСЃРїРµС€РЅС‹Р№ РєР°СЃС‚
+	// РІ РїРѕСЂСЏРґРєРµ:
 	// 
 	// const_cast
 	// static_cast
@@ -85,12 +85,12 @@ int main() {
 	// reinterpret_cast
 	// reinterpret_cast -> const_cast
 	// 
-	// Если классы в иерархии наследования не виртуальные
-	// то можно кастовать (upcast/downcast) через static_cast
+	// Р•СЃР»Рё РєР»Р°СЃСЃС‹ РІ РёРµСЂР°СЂС…РёРё РЅР°СЃР»РµРґРѕРІР°РЅРёСЏ РЅРµ РІРёСЂС‚СѓР°Р»СЊРЅС‹Рµ
+	// С‚Рѕ РјРѕР¶РЅРѕ РєР°СЃС‚РѕРІР°С‚СЊ (upcast/downcast) С‡РµСЂРµР· static_cast
 	Child *pChild2 = static_cast<Child *>(pParent);
 
 
-	// downcast UB - так делать нельзя
+	// downcast UB - С‚Р°Рє РґРµР»Р°С‚СЊ РЅРµР»СЊР·СЏ
 	// Child *pChild2 = (Child *)&parent;
 
 	pParent->sleep(); // sleep() non-virtual // child sleep() virtual
@@ -103,8 +103,8 @@ int main() {
 	// static_cast<new_type>(expression)
 	int a = 5;
 	std::cout << "a: " << a << std::endl;
-	double b = static_cast<double>(a); // Раньше: double(a)
-									   // или (double)a
+	double b = static_cast<double>(a); // Р Р°РЅСЊС€Рµ: double(a)
+									   // РёР»Рё (double)a
 	std::cout << "b: " << b << std::endl;
 
 	int c = 6;
